@@ -2,10 +2,7 @@ package de.codecentric.webservice.endpoint;
 
 import de.codecentric.namespace.weatherservice.WeatherException;
 import de.codecentric.namespace.weatherservice.WeatherService;
-import de.codecentric.namespace.weatherservice.general.ForecastRequest;
-import de.codecentric.namespace.weatherservice.general.ForecastReturn;
-import de.codecentric.namespace.weatherservice.general.WeatherInformationReturn;
-import de.codecentric.namespace.weatherservice.general.WeatherReturn;
+import de.codecentric.namespace.weatherservice.general.*;
 
 import javax.jws.WebParam;
 
@@ -20,7 +17,15 @@ public class WeatherServiceEndpoint implements WeatherService {
 
     @Override
     public ForecastReturn getCityForecastByZIP(@WebParam(name = "ForecastRequest", targetNamespace = "http://www.codecentric.de/namespace/weatherservice/general") ForecastRequest forecastRequest) throws WeatherException {
-        return null;
+        ObjectFactory objectFactoryGeneral = new de.codecentric.namespace.weatherservice.general.ObjectFactory();
+
+        ForecastReturn forecastReturn = objectFactoryGeneral.createForecastReturn();
+        forecastReturn.setCity("Weimar");
+        forecastReturn.setState("Deutschland");
+        forecastReturn.setSuccess(true);
+        forecastReturn.setWeatherStationCity("Weimar");
+
+        return forecastReturn;
     }
 
     @Override
